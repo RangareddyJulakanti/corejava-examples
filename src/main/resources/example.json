@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$ref": "#/definitions/Welcome9",
+  "definitions": {
+    "Welcome9": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "age": {
+          "type": "integer"
+        },
+        "address": {
+          "$ref": "#/definitions/Address"
+        }
+      },
+      "required": [
+        "address",
+        "age",
+        "firstName"
+      ],
+      "title": "Welcome9"
+    },
+    "Address": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "streetAddress": {
+          "type": "string",
+          "format": "integer"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string",
+          "format": "integer"
+        }
+      },
+      "required": [
+        "city",
+        "postalCode",
+        "state",
+        "streetAddress"
+      ],
+      "title": "Address"
+    }
+  }
+}
