@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 public class Test {
     public static void main(String[] args) {
-
+/*
         Map<Integer,Long> map=IntStream
                 .of(1, 2, 3, 1, 2, 5, 6, 5, 3)
                 .boxed()
@@ -21,7 +21,7 @@ public class Test {
         Map<String,Long> map1= Stream.of("ranga","raju","kiran","ranga")
                 .collect(Collectors.groupingBy(Function.identity(),Collectors.counting()));
 
-        System.out.println(map1);
+        System.out.println(map1);*/
         //Print index of 40
         int a[]={10,20,30,40,50,60};
         int requiredIndex=-1;

@@ -1,17 +1,13 @@
 package com.exceptionHandling;
 
-import com.google.common.io.Files;
-import org.springframework.util.CollectionUtils;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.util.StringUtils;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Test {
     public static void main(String[] args) {
@@ -61,35 +57,17 @@ public class Test {
     }
 
     private static List<Student> getDataFromUI() {
-        return Arrays.asList(
-                new Student(1, "ranga", "A"),
-                new Student(2, "raju", null),
-                new Student(3, "mohan", "C"),
-                new Student(4, "", "D")
-        );
+        String jsonString="[{\"id\":1,\"name\":\"ranga\",\"collegeName\":\"JNTU\"},{\"id\":2,\"name\":\"RAJU\",\"collegeName\":\"\"},{\"id\":3,\"name\":\"MOHAN\",\"collegeName\":\"PULLAREDDY\"},{\"id\":4,\"name\":\"\",\"collegeName\":\"RAYALASEEMA UNIVERSITY\"}]";
+
+        ObjectMapper o=new ObjectMapper();
+        try {
+           List<Student> l= o.readValue(jsonString,  new TypeReference<List<Student>>() {
+           });
+           return l;
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 }
 
-class Student {
-    private final int id;
-    private final String name;
-    private final String collegeName;
-
-    public Student(int id, String name, String collegeName) {
-        this.id = id;
-        this.name = name;
-        this.collegeName = collegeName;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getCollegeName() {
-        return collegeName;
-    }
-}
