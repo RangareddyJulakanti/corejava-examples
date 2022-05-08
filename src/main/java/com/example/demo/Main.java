@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) throws JsonProcessingException {
-        String sampleSchema="{\n" +
+     /*   String sampleSchema="{\n" +
                 "  \"$schema\": \"http://json-schema.org/draft-06/schema#\",\n" +
                 "  \"$ref\": \"#/definitions/Welcome9\",\n" +
                 "  \"definitions\": {\n" +
@@ -93,7 +93,15 @@ public class Main {
                 "}\n";
         ObjectMapper jacksonObjectMapper = new ObjectMapper();
        JsonNode jsonNode= jacksonObjectMapper.readTree(sampleSchema);
-       System.out.println(jsonNode);
+       System.out.println(jsonNode);*/
+
+
+
+
+        I i=new C1();
+        i.m1();
+        i=new C2();
+        i.m1();
 
     }
 

@@ -21,6 +21,7 @@ public class Amount {
 
     public  enum CurrencyType{
         USD,
-        INR
+        INR,
+        DINAR
     }
 }

@@ -5,18 +5,17 @@ import java.util.*;
 
 public class Client {
     public static void main(String[] args) {
+        List<Employee> employeeList = getEmployeeListFromDB();
 
-
-        Map<String, ITaxCalculation> taxCalculationMap = new HashMap<>();
-
+        final Map<String, ITaxCalculation> taxCalculationMap = new HashMap<>();
         taxCalculationMap.put("IN", new IndianTaxCalculator());
         taxCalculationMap.put("US", new USTaxCalculator());
-        List<Employee> employeeList = getEmployeeListFromDB();
+        taxCalculationMap.put("DUBAI", new DubaiTaxCalculator());
 
 
         for (Employee employee : employeeList) {
-            ITaxCalculation iTaxCalculation = taxCalculationMap.get(employee.getEmployeeType().name());
-            //  ITaxCalculation iTaxCalculation=taxCalculation(employee.getCountry().name());
+           ITaxCalculation iTaxCalculation = taxCalculationMap.get(employee.getCountry().name());
+             // ITaxCalculation iTaxCalculation=taxCalculation(employee.getCountry().name());
             if (iTaxCalculation == null) {
                 throw new RuntimeException("Invalid countryType= " + employee.getEmployeeType().name());
             }
@@ -27,7 +26,8 @@ public class Client {
 
     }
 
-    private static List<Employee> getEmployeeListFromDB() {
+    public static  List<Employee> getEmployeeListFromDB() {
+
        return Arrays.asList(
                 new Employee(
                         "ranga",
@@ -35,6 +35,18 @@ public class Client {
                         new Amount(new BigInteger("200000"), Amount.CurrencyType.INR),
                         Country.IN
                 ),
+               new Employee(
+                       "sarath",
+                       Employee.EmployeeType.CONTRACT,
+                       new Amount(new BigInteger("300000"), Amount.CurrencyType.INR),
+                       Country.IN
+               ),
+               new Employee(
+                       "Kiran",
+                       Employee.EmployeeType.CONTRACT,
+                       new Amount(new BigInteger("400000"), Amount.CurrencyType.DINAR),
+                       Country.DUBAI
+               ),
                 new Employee(
                         "raju",
                         Employee.EmployeeType.CONTRACT,
@@ -49,6 +61,8 @@ public class Client {
             return new IndianTaxCalculator();
         } else if (countryType.equalsIgnoreCase("US")) {
             return new USTaxCalculator();
+        } else if (countryType.equalsIgnoreCase("DUBAI")) {
+            return new DubaiTaxCalculator();
         } else {
             throw new RuntimeException("Invalid countryType");
         }
